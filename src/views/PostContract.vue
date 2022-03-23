@@ -1,12 +1,13 @@
 <template>
   <v-container>
     <v-card
-      class="mx-auto my-12 pt-3"
+      class="mx-auto my-5 pt-3"
       elevation="2"
-      max-width="450"
+      max-width="800"
     >
       <v-card-text>
         <h1>Post Contract</h1>
+        
         <form class="mt-4">
           <v-text-field
             v-model="title"
@@ -19,18 +20,18 @@
           <v-textarea
             solo
             class="mb-0"
-            rows="4"
+            rows="3"
             label="Description"
             v-model="description"
           ></v-textarea>
 
-          <v-file-input
-            label="Upload Image"
-            outlined
-            dense
-            prepend-icon="mdi-camera"
-            v-model="file"
-          ></v-file-input>
+          <v-textarea
+            solo
+            class="mb-0"
+            rows="10"
+            label="Code"
+            v-model="code"
+          ></v-textarea>
 
           <v-btn
             v-if="!loading"
@@ -70,18 +71,18 @@ export default {
     loading: false,
     title: "",
     description: "",
-    file: null,
+    code: "",
   }),
   computed: {
     isDisabled() {
-      return !this.title || !this.description;
+      return !this.title || !this.description || !this.code;
     },
   },
   methods: {
     async postContractDetail() {
       try{
         this.loading = true
-        console.log(this.title, this.description, this.file)
+        console.log(this.title, this.description, this.code)
 
         let { data } = await client.db.getJSON(publicKey, dataKey)
         console.log(data)
@@ -89,6 +90,7 @@ export default {
         const json = {
           title: this.title,
           description: this.description,
+          code: this.code,
           date: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
         }
 
