@@ -12,16 +12,19 @@
         </v-icon>Post Contract
       </v-btn>
     </div>
+
     <v-card
       class="mb-3"
+      :key="contract.title"
+      v-for="contract in this.contracts"
     >
       <v-card-text>
         <h1>
-          Title
+          {{ contract.title }}
         </h1>
         <br />
         <div class="text--primary">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non officiis et minima quae enim quisquam eligendi velit ea, sequi voluptatibus. Officia consectetur deleniti vero magnam deserunt facilis quo, id doloribus?
+          {{ contract.description }}
         </div>
       </v-card-text>
       <v-card-actions>
@@ -34,57 +37,23 @@
       </v-card-actions>
     </v-card>
 
-    <v-card
-      class="mb-3"
-    >
-      <v-card-text>
-        <h1>
-          Title
-        </h1>
-        <br />
-        <div class="text--primary">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non officiis et minima quae enim quisquam eligendi velit ea, sequi voluptatibus. Officia consectetur deleniti vero magnam deserunt facilis quo, id doloribus?
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn
-          text
-          color="teal accent-4"
-        >
-          Learn More
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-
-    <v-card
-      class="mb-3"
-    >
-      <v-card-text>
-        <h1>
-          Title
-        </h1>
-        <br />
-        <div class="text--primary">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non officiis et minima quae enim quisquam eligendi velit ea, sequi voluptatibus. Officia consectetur deleniti vero magnam deserunt facilis quo, id doloribus?
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn
-          text
-          color="teal accent-4"
-        >
-          Learn More
-        </v-btn>
-      </v-card-actions>
-    </v-card>
   </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
+import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
+import { SEEDPHASE } from '../config';
+
+const portal = 'https://siasky.net/';
+const client = new SkynetClient(portal);
+const { publicKey } = genKeyPairFromSeed(SEEDPHASE);
+const dataKey = "main";
 
 export default {
   name: 'Home',
+  data: () => ({
+    contracts: []
+  }),
   components: {
     
   },
@@ -93,5 +62,14 @@ export default {
       this.$router.push('/post-contract');
     }
   },
+  async created() {
+    try {
+      const { data } = await client.db.getJSON(publicKey, dataKey);
+      console.log(data);
+      this.contracts = data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 </script>
