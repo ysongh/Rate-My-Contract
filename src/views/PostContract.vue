@@ -88,7 +88,8 @@ export default {
 
         const json = {
           title: this.title,
-          description: this.description
+          description: this.description,
+          date: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
         }
 
         if(data.length) {

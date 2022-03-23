@@ -19,10 +19,12 @@
       v-for="contract in this.contracts"
     >
       <v-card-text>
-        <h1>
-          {{ contract.title }}
-        </h1>
-        <br />
+        <div class="d-flex justify-space-between align-center mb-1">
+          <h1>
+            {{ contract.title }}
+          </h1>
+          <p>{{ contract.date }}</p>
+        </div>
         <div class="text--primary">
           {{ contract.description }}
         </div>
