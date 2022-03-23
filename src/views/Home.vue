@@ -33,8 +33,9 @@
         <v-btn
           text
           color="teal accent-4"
+          @click="goToDetailPage(contract)"
         >
-          Learn More
+          View
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -61,7 +62,16 @@ export default {
   },
   methods: {
     goToFormPage() {
-      this.$router.push('/post-contract');
+      this.$router.push('/post-contract')
+    },
+    goToDetailPage(data){
+      console.log(data);
+      this.$router.push({
+        name: 'PostContractDetail',
+        params: {
+          data: data
+        }
+      })
     }
   },
   async created() {

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import PostContract from '../views/PostContract.vue'
+import PostContractDetail from '../views/PostContractDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/post-contract',
     name: 'PostContract',
     component: PostContract
+  },
+  {
+    path: '/post-contract-detail',
+    name: 'PostContractDetail',
+    component: PostContractDetail
   }
 ]
 
