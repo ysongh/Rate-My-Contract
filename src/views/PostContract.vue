@@ -56,6 +56,13 @@
 </template>
 
 <script>
+import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
+import { SEEDPHASE } from '../config';
+
+const portal = 'https://siasky.net/';
+const client = new SkynetClient(portal);
+const { privateKey, publicKey } = genKeyPairFromSeed(SEEDPHASE);
+const dataKey = "main";
 
 export default {
   name: "PostContract",
@@ -75,6 +82,23 @@ export default {
       try{
         this.loading = true
         console.log(this.title, this.description, this.file)
+
+        let { data } = await client.db.getJSON(publicKey, dataKey)
+        console.log(data)
+
+        const json = {
+          title: this.title,
+          description: this.description
+        }
+
+        if(data.length) {
+          data.unshift(json);
+        }
+        else {
+          data = [json];
+        }
+
+        await client.db.setJSON(privateKey, dataKey, data)
 
         this.loading = false
         this.$router.push('/')
