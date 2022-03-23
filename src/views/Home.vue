@@ -1,7 +1,17 @@
 <template>
   <v-container>
-    <h1>Rate My Contract</h1>
-
+    <div class="d-flex justify-space-between align-center mb-4">
+      <h1>Rate My Contract</h1>
+      <v-btn
+        color="orange"
+        elevation="2"
+        @click="goToFormPage()"
+      >
+        <v-icon left>
+          mdi-pencil-plus
+        </v-icon>Post Contract
+      </v-btn>
+    </div>
     <v-card
       class="mb-3"
     >
@@ -77,6 +87,11 @@ export default {
   name: 'Home',
   components: {
     
-  }
+  },
+  methods: {
+    goToFormPage() {
+      this.$router.push('/post-contract');
+    }
+  },
 }
 </script>
