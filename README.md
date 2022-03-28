@@ -3,6 +3,11 @@
 # Rate My Contract
 A review site for Smart Contracts
 
+## Technologies
+- Vue 2
+- Vuetify
+- SkyDB
+
 ## Project setup
 ```
 npm install
