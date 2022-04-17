@@ -10,62 +10,64 @@
     </v-card>
 
     <v-card>
-      <v-textarea
-        solo
-        class="mb-0"
-        rows="4"
-        label="Add comment"
-        v-model="comment"
-      ></v-textarea>
+      <v-card-text>
+        <v-textarea
+          solo
+          class="mb-0"
+          rows="4"
+          label="Add comment"
+          v-model="comment"
+        ></v-textarea>
 
-      <v-btn  v-if="!loading" class="btn-add mb-6" color="orange" @click="addComment()">
-        Add Comment
-      </v-btn>
+        <v-btn  v-if="!loading" class="btn-add mb-6" color="orange" @click="addComment()">
+          Add Comment
+        </v-btn>
 
-      <div class="text-center mb-3" v-else>
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        ></v-progress-circular>
-      </div>
+        <div class="text-center mb-3" v-else>
+          <v-progress-circular
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </div>
 
-      <div v-bind:key="comment.date" v-for="comment of comments">
-        <v-card
-          class="mb-1"
-          color="#26c6da"
-          dark
-        >
-          <v-card-text class="font-weight-bold">
-            {{ comment.text}}
-          </v-card-text>
+        <div v-bind:key="comment.date" v-for="comment of comments">
+          <v-card
+            class="mb-1"
+            color="#26c6da"
+            dark
+          >
+            <v-card-text class="font-weight-bold">
+              {{ comment.text}}
+            </v-card-text>
 
-          <v-card-actions>
-            <v-list-item class="grow">
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt="User"
-                  src="comment.text"
-                ></v-img>
-              </v-list-item-avatar>
+            <v-card-actions>
+              <v-list-item class="grow">
+                <v-list-item-avatar color="grey darken-3">
+                  <v-img
+                    class="elevation-6"
+                    alt="User"
+                    src="comment.text"
+                  ></v-img>
+                </v-list-item-avatar>
 
-              <v-list-item-content>
-                  <v-list-item-title>{{ comment.name }} - {{ comment.timestamp }}</v-list-item-title>
-                </v-list-item-content>
+                <v-list-item-content>
+                    <v-list-item-title>{{ comment.name }} - {{ comment.timestamp }}</v-list-item-title>
+                  </v-list-item-content>
 
-                <v-row
-                  align="center"
-                  justify="end"
-                >
-                  <v-icon class="mr-1">
-                    mdi-heart
-                  </v-icon>
-                  <span class="subheading mr-2">0</span>
-                </v-row>
-              </v-list-item>
-            </v-card-actions>
-          </v-card>
-      </div>
+                  <v-row
+                    align="center"
+                    justify="end"
+                  >
+                    <v-icon class="mr-1">
+                      mdi-heart
+                    </v-icon>
+                    <span class="subheading mr-2">0</span>
+                  </v-row>
+                </v-list-item>
+              </v-card-actions>
+            </v-card>
+        </div>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
