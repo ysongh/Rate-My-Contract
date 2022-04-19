@@ -1,16 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <img class="logo" src="./assets/logo.png" alt="Logo">
-
-      <v-spacer></v-spacer>
-      
-    </v-app-bar>
-
+    <Navbar />
     <v-main>
       <router-view/>
     </v-main>
@@ -19,11 +9,13 @@
 </template>
 
 <script>
+import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
+    Navbar,
     Footer
   },
   data: () => ({
@@ -34,7 +26,5 @@ export default {
 
 
 <style scoped>
-  .logo {
-    width: 100px;
-  }
+
 </style>
