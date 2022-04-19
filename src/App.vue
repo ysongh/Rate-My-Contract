@@ -5,7 +5,7 @@
       color="primary"
       dark
     >
-      <span>Rate My Contract</span>
+      <img class="logo" src="./assets/logo.png" alt="Logo">
 
       <v-spacer></v-spacer>
       
@@ -34,4 +34,7 @@ export default {
 
 
 <style scoped>
+  .logo {
+    width: 100px;
+  }
 </style>
