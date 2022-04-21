@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Rate My Contract</h1>
+      <h1>Review the list of Contracts</h1>
       <v-btn
         color="orange"
         elevation="2"

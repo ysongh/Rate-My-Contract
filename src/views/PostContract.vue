@@ -6,7 +6,7 @@
       max-width="800"
     >
       <v-card-text>
-        <h1>Post Contract</h1>
+        <h1>Post Your Contract Code</h1>
         
         <form class="mt-4">
           <v-text-field
