@@ -4,7 +4,10 @@
     color="primary"
     dark
   >
-    <img class="logo" src="../assets/logo.png" alt="Logo">
+    
+    <router-link :to="{ path: '/'}">
+      <img class="logo" src="../assets/logo.png" alt="Logo">
+    </router-link>
 
     <v-spacer></v-spacer>
     
@@ -20,5 +23,6 @@ export default {
 <style>
   .logo {
     width: 100px;
+    margin-top: 7px;
   }
 </style>
