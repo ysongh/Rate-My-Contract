@@ -17,7 +17,7 @@
     >
       Login With Unstoppable Domain
     </v-btn>
-    <p>{{domainName}}</p>
+    <p class="mt-4">{{domainName}}</p>
   </v-app-bar>
 </template>
 
@@ -49,6 +49,17 @@ export default {
         console.error(error)
       }
     }
+  },
+  created() {
+    uauth
+      .user()
+      .then(userData => {
+        console.log(userData);
+        this.domainName = userData.sub
+      })
+      .catch(error => {
+        console.error('error:', error);
+      })
   }
 }
 </script>
