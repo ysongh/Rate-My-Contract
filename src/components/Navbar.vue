@@ -9,6 +9,10 @@
       <img class="logo" src="../assets/logo.png" alt="Logo">
     </router-link>
 
+    <router-link :to="{ path: '/'}" class="nav-link">
+      Home
+    </router-link>
+
     <v-spacer></v-spacer>
     <v-btn
       v-if="!domainName"
@@ -35,6 +39,7 @@ const uauth = new UAuth({
 export default {
   name: "Navbar",
   data: () => ({
+    domainData: {},
     domainName: ''
   }),
   methods: {
@@ -45,6 +50,7 @@ export default {
         console.log(authorization)
 
         this.domainName = authorization.idToken.sub
+        this.domainData = authorization
       } catch (error) {
         console.error(error)
       }
@@ -56,6 +62,7 @@ export default {
       .then(userData => {
         console.log(userData);
         this.domainName = userData.sub
+        this.domainData = userData
       })
       .catch(error => {
         console.error('error:', error);
@@ -68,5 +75,17 @@ export default {
   .logo {
     width: 100px;
     margin-top: 7px;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: #fff !important;
+  }
+  
+  .nav-link:hover {
+     color: rgb(184, 193, 203) !important;
   }
 </style>
