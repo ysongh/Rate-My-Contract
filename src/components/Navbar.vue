@@ -21,11 +21,12 @@
     >
       Login With Unstoppable Domain
     </v-btn>
-    <p class="mt-4">{{domainName}}</p>
+    <p class="mt-4">{{this.domainData.sub}}</p>
   </v-app-bar>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import UAuth from '@uauth/js'
 
 import { UNSTOPPABLEDOMAINS_CLIENTID, UNSTOPPABLEDOMAINS_REDIRECT_URI } from '../config'
@@ -39,10 +40,11 @@ const uauth = new UAuth({
 export default {
   name: "Navbar",
   data: () => ({
-    domainData: {},
     domainName: ''
   }),
+  computed: mapGetters(['domainData']),
   methods: {
+    ...mapActions(['changeDomainData']),
     async loginWithUnstoppableDomains() {
       try {
         const authorization = await uauth.loginWithPopup()
@@ -50,7 +52,7 @@ export default {
         console.log(authorization)
 
         this.domainName = authorization.idToken.sub
-        this.domainData = authorization
+        this.changeDomainData(authorization)
       } catch (error) {
         console.error(error)
       }
@@ -62,7 +64,7 @@ export default {
       .then(userData => {
         console.log(userData);
         this.domainName = userData.sub
-        this.domainData = userData
+        this.changeDomainData(userData)
       })
       .catch(error => {
         console.error('error:', error);
