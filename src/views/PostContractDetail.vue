@@ -67,11 +67,13 @@
 </template>
 
 <script>
-  import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-  import { SEEDPHASE } from '../config';
-  const portal = 'https://siasky.net/';
-  const client = new SkynetClient(portal);
-  const { privateKey, publicKey } = genKeyPairFromSeed(SEEDPHASE);
+  import { mapGetters } from 'vuex'
+  import { SkynetClient, genKeyPairFromSeed } from "skynet-js"
+
+  import { SEEDPHASE } from '../config'
+  const portal = 'https://siasky.net/'
+  const client = new SkynetClient(portal)
+  const { privateKey, publicKey } = genKeyPairFromSeed(SEEDPHASE)
 
   export default {
     name: 'PostContractDetail',
@@ -80,6 +82,7 @@
       comments: [],
       comment: "",
     }),
+    computed: mapGetters(['domainData']),
     methods: {
       async addComment() {
         try {
@@ -89,7 +92,7 @@
           console.log(data)
           const json = {
             text: this.comment,
-            name: "Guest",
+            name: this.domainData?.sub || "Guest",
             timestamp: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`
           }
           if(data?.length) {
@@ -100,7 +103,7 @@
           }
           await client.db.setJSON(privateKey, this.$route.params.data.title, data)
           const newData = await client.db.getJSON(publicKey, this.$route.params.data.title)
-          
+           console.log(newData)
           this.comment = ""
           this.comments = newData.data
           this.loading = false
