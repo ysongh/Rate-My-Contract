@@ -29,7 +29,8 @@
           {{ contract.description }}
         </div>
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions class="d-flex justify-space-between">
+        <p class="ml-2">By {{ contract.author }}</p>
         <v-btn
           text
           color="teal accent-4"

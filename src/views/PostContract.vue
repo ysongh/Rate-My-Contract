@@ -57,13 +57,14 @@
 </template>
 
 <script>
-import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-import { SEEDPHASE } from '../config';
+import { SkynetClient, genKeyPairFromSeed } from "skynet-js"
+import { mapGetters } from 'vuex'
+import { SEEDPHASE } from '../config'
 
-const portal = 'https://siasky.net/';
-const client = new SkynetClient(portal);
-const { privateKey, publicKey } = genKeyPairFromSeed(SEEDPHASE);
-const dataKey = "main";
+const portal = 'https://siasky.net/'
+const client = new SkynetClient(portal)
+const { privateKey, publicKey } = genKeyPairFromSeed(SEEDPHASE)
+const dataKey = "main"
 
 export default {
   name: "PostContract",
@@ -74,6 +75,7 @@ export default {
     code: "",
   }),
   computed: {
+    ...mapGetters(['domainData']),
     isDisabled() {
       return !this.title || !this.description || !this.code;
     },
@@ -91,6 +93,7 @@ export default {
           title: this.title,
           description: this.description,
           code: this.code,
+          author: this.domainData?.sub || "Guest",
           date: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
         }
 
