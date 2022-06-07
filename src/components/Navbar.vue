@@ -14,6 +14,7 @@
     </router-link>
 
     <v-spacer></v-spacer>
+    <p class="mt-4">{{this.domainData.sub}}</p>
     <v-btn
       v-if="!domainName"
       color="green"
@@ -21,7 +22,14 @@
     >
       Login With Unstoppable Domain
     </v-btn>
-    <p class="mt-4">{{this.domainData.sub}}</p>
+    <v-btn
+      v-else
+      class="ml-4"
+      color="red"
+      @click="logoutFromUnstoppableDomains()"
+    >
+      Logout
+    </v-btn>
   </v-app-bar>
 </template>
 
@@ -56,7 +64,17 @@ export default {
       } catch (error) {
         console.error(error)
       }
+    },
+    async logoutFromUnstoppableDomains() {
+    try {
+      await uauth.logout()
+
+      this.domainName = ""
+      this.changeDomainData(null)
+    } catch (error) {
+      console.error(error);
     }
+  }
   },
   created() {
     uauth
