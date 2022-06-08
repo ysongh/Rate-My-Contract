@@ -14,7 +14,7 @@
     </router-link>
 
     <v-spacer></v-spacer>
-    <p class="mt-4">{{this.domainData.sub}}</p>
+    <p class="mt-4">{{this.domainName}}</p>
     <v-btn
       v-if="!domainName"
       color="green"
