@@ -42,7 +42,8 @@ import { UNSTOPPABLEDOMAINS_CLIENTID, UNSTOPPABLEDOMAINS_REDIRECT_URI } from '..
 const uauth = new UAuth({
   clientID: UNSTOPPABLEDOMAINS_CLIENTID,
   redirectUri: UNSTOPPABLEDOMAINS_REDIRECT_URI,
-  scope: "openid wallet email:optional humanity_check:optional"
+  scope: "openid wallet"
+  // scope: "openid wallet email:optional humanity_check:optional"
 });
 
 export default {
