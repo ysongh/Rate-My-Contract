@@ -6,6 +6,10 @@
         <h2>{{ this.$route.params.data.title }}</h2>
         <p>{{ this.$route.params.data.description }}</p>
         <pre class="code">{{ this.$route.params.data.code }}</pre>
+        <v-btn class="btn-add mt-3" color="orange" @click="connectToBlockchain">
+          Connect Wallet
+        </v-btn>
+        <p>{{ this.walletAddress }}</p>
       </v-card-text>
     </v-card>
 
@@ -67,7 +71,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import { SkynetClient, genKeyPairFromSeed } from "skynet-js"
 
   import { SEEDPHASE } from '../config'
@@ -82,8 +86,9 @@
       comments: [],
       comment: "",
     }),
-    computed: mapGetters(['domainData']),
+    computed: mapGetters(['domainData', 'walletAddress']),
     methods: {
+      ...mapActions(['connectToBlockchain']),
       async addComment() {
         try {
           this.loading = true
