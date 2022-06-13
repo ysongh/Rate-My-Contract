@@ -6,10 +6,15 @@
         <h2>{{ this.$route.params.data.title }}</h2>
         <p>{{ this.$route.params.data.description }}</p>
         <pre class="code">{{ this.$route.params.data.code }}</pre>
-        <v-btn class="btn-add mt-3" color="orange" @click="connectToBlockchain">
+        <v-btn v-if="!this.walletAddress" class="btn-add mt-3" color="orange" @click="connectToBlockchain">
           Connect Wallet
         </v-btn>
-        <p>{{ this.walletAddress }}</p>
+        <div v-else class="d-flex align-center">
+          <v-btn class="btn-add mt-3" color="orange" @click="mintNFT()">
+            Mint as NFT
+          </v-btn>
+          <p class="ml-3 mt-5">{{ this.walletAddress }}</p>
+        </div>
       </v-card-text>
     </v-card>
 
@@ -86,7 +91,7 @@
       comments: [],
       comment: "",
     }),
-    computed: mapGetters(['domainData', 'walletAddress']),
+    computed: mapGetters(['domainData', 'walletAddress', 'cContract']),
     methods: {
       ...mapActions(['connectToBlockchain']),
       async addComment() {
@@ -116,6 +121,18 @@
           console.log(error);
           this.loading = false
         }
+      },
+      async mintNFT() {
+        try{
+          const tx = await this.cContract.methods
+            .buyContract(this.$route.params.data.title, this.walletAddress)
+            .send({ from: this.walletAddress })
+
+          console.log(tx)
+        } catch(error) {
+           console.error(error)
+        }
+        
       }
     },
     async created() {
