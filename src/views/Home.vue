@@ -3,6 +3,7 @@
     <div class="d-flex justify-space-between align-center mb-4">
       <h1>Review the list of Contracts</h1>
       <v-btn
+        v-if='this.domainData.sub'
         color="orange"
         elevation="2"
         @click="goToFormPage()"
@@ -45,12 +46,13 @@
 </template>
 
 <script>
-import { SkynetClient, genKeyPairFromSeed } from "skynet-js";
-import { SEEDPHASE } from '../config';
+import { mapGetters } from 'vuex'
+import { SkynetClient, genKeyPairFromSeed } from "skynet-js"
+import { SEEDPHASE } from '../config'
 
-const portal = 'https://siasky.net/';
-const client = new SkynetClient(portal);
-const { publicKey } = genKeyPairFromSeed(SEEDPHASE);
+const portal = 'https://siasky.net/'
+const client = new SkynetClient(portal)
+const { publicKey } = genKeyPairFromSeed(SEEDPHASE)
 const dataKey = "main";
 
 export default {
@@ -61,6 +63,7 @@ export default {
   components: {
     
   },
+  computed: mapGetters(['domainData']),
   methods: {
     goToFormPage() {
       this.$router.push('/post-contract')
