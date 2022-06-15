@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    
     <div class="d-flex justify-space-between align-center mb-4">
       <h1>Review the list of Contracts</h1>
       <v-btn
@@ -14,6 +15,14 @@
       </v-btn>
     </div>
 
+    <div v-for="index in 3" :key='index'>
+      <v-skeleton-loader
+        v-if='loading'
+        v-bind="attrs"
+        type="article, actions"
+      ></v-skeleton-loader>
+    </div>
+    
     <v-card
       class="mb-3"
       :key="contract.title"
@@ -58,7 +67,8 @@ const dataKey = "main";
 export default {
   name: 'Home',
   data: () => ({
-    contracts: []
+    contracts: [],
+    loading: false
   }),
   components: {
     
@@ -80,11 +90,14 @@ export default {
   },
   async created() {
     try {
-      const { data } = await client.db.getJSON(publicKey, dataKey);
-      console.log(data);
-      this.contracts = data;
+      this.loading = true
+      const { data } = await client.db.getJSON(publicKey, dataKey)
+      console.log(data)
+      this.contracts = data
+      this.loading = false
     } catch (error) {
       console.log(error);
+       this.loading = false
     }
   }
 }
