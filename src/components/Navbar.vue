@@ -13,6 +13,10 @@
       Home
     </router-link>
 
+    <router-link :to="{ path: '/mynfts'}" class="nav-link">
+      My NFTs
+    </router-link>
+
     <v-spacer></v-spacer>
     <p class="mt-4">{{this.domainName}}</p>
     <v-btn
