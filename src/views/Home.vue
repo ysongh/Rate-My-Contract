@@ -42,7 +42,6 @@
       <v-card-actions class="d-flex justify-space-between">
         <p class="ml-2">By {{ contract.author }}</p>
         <v-btn
-          text
           color="teal accent-4"
           @click="goToDetailPage(contract)"
         >
