@@ -7,6 +7,8 @@ A review site for Smart Contracts
 - Vue 2
 - Vuetify
 - SkyDB
+- Covalent API 
+- Unstoppable Domains Login
 
 ## Project setup
 ```
@@ -15,7 +17,10 @@ npm install
 
 ### Create a file called 'config.js' on the src folder and add the following code
 ```
-export const seedphase = "your words";
+export const seedphase = "";
+export const UNSTOPPABLEDOMAINS_CLIENTID = ""
+export const UNSTOPPABLEDOMAINS_REDIRECT_URI = ""
+export const COVALENT_APIKEY = ""
 ```
 
 
