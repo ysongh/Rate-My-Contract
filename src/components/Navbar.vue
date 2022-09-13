@@ -57,7 +57,7 @@ import { mapGetters, mapActions } from 'vuex'
 import UAuth from '@uauth/js'
 import Moralis from 'moralis'
 
-import { UNSTOPPABLEDOMAINS_CLIENTID, UNSTOPPABLEDOMAINS_REDIRECT_URI } from '../config'
+import { MORALIS_SERVERURL, MORALIS_APPID, UNSTOPPABLEDOMAINS_CLIENTID, UNSTOPPABLEDOMAINS_REDIRECT_URI } from '../config'
 
 const uauth = new UAuth({
   clientID: UNSTOPPABLEDOMAINS_CLIENTID,
@@ -66,8 +66,8 @@ const uauth = new UAuth({
   // scope: "openid wallet email:optional humanity_check:optional"
 });
 
-const serverUrl = "https://srq8gktgfvih.usemoralis.com:2053/server";
-const appId = "daUYczsTNOYEduww1vlAJrvt7mdmO4YzhEixLfJq";
+const serverUrl = MORALIS_SERVERURL;
+const appId = MORALIS_APPID;
 
 Moralis.start({ serverUrl, appId });
 
