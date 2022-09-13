@@ -34,12 +34,28 @@
     >
       Logout
     </v-btn>
+    <v-btn
+      v-if="!walletAddress"
+      color="green"
+      @click="loginWithMoralis()"
+    >
+      Login With MetaMask
+    </v-btn>
+    <v-btn
+      v-else
+      class="ml-4"
+      color="red"
+      @click="logoutMoralis()"
+    >
+      Logout
+    </v-btn>
   </v-app-bar>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import UAuth from '@uauth/js'
+import Moralis from 'moralis'
 
 import { UNSTOPPABLEDOMAINS_CLIENTID, UNSTOPPABLEDOMAINS_REDIRECT_URI } from '../config'
 
@@ -50,14 +66,39 @@ const uauth = new UAuth({
   // scope: "openid wallet email:optional humanity_check:optional"
 });
 
+const serverUrl = "https://srq8gktgfvih.usemoralis.com:2053/server";
+const appId = "daUYczsTNOYEduww1vlAJrvt7mdmO4YzhEixLfJq";
+
+Moralis.start({ serverUrl, appId });
+
 export default {
   name: "Navbar",
   data: () => ({
     domainName: ''
   }),
-  computed: mapGetters(['domainData']),
+  computed: mapGetters(['domainData', 'walletAddress']),
   methods: {
-    ...mapActions(['changeDomainData']),
+    ...mapActions(['changeDomainData', 'connectToBlockchain']),
+    async loginWithMoralis() {
+      try {
+        await Moralis.authenticate()
+
+        console.log('Address', Moralis.User.current().get('ethAddress'))
+
+        this.connectToBlockchain();
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async logoutMoralis() {
+      try {
+        await Moralis.User.logOut();
+
+        console.log('Logged out.', Moralis.User.current());
+      } catch (error) {
+        console.error(error)
+      }
+    },
     async loginWithUnstoppableDomains() {
       try {
         const authorization = await uauth.loginWithPopup()

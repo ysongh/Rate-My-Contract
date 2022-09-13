@@ -11,6 +11,7 @@
     "@openzeppelin/contracts": "^4.6.0",
     "@uauth/js": "^1.1.0",
     "core-js": "^3.6.5",
+    "moralis": "^1.11.0",
     "skynet-js": "^3.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
