@@ -55,6 +55,9 @@ export default new Vuex.Store({
       } else {
         window.alert('Contract is not deployed to detected network.')
       }
+    },
+    async resetWalletAddress({ commit }) {
+      commit('setWalletAddress', "");
     }
   },
   modules: {

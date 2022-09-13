@@ -18,8 +18,8 @@
     </router-link>
 
     <v-spacer></v-spacer>
-    <p class="mt-4">{{this.domainName}}</p>
-    <v-btn
+    <!-- <p class="mt-4">{{this.domainName}}</p> -->
+    <!-- <v-btn
       v-if="!domainName"
       color="green"
       @click="loginWithUnstoppableDomains()"
@@ -33,7 +33,8 @@
       @click="logoutFromUnstoppableDomains()"
     >
       Logout
-    </v-btn>
+    </v-btn> -->
+    <p class="mt-4">{{this.walletAddress}}</p>
     <v-btn
       v-if="!walletAddress"
       color="green"
@@ -78,7 +79,7 @@ export default {
   }),
   computed: mapGetters(['domainData', 'walletAddress']),
   methods: {
-    ...mapActions(['changeDomainData', 'connectToBlockchain']),
+    ...mapActions(['changeDomainData', 'connectToBlockchain', 'resetWalletAddress']),
     async loginWithMoralis() {
       try {
         await Moralis.authenticate()
@@ -95,6 +96,7 @@ export default {
         await Moralis.User.logOut();
 
         console.log('Logged out.', Moralis.User.current());
+        this.resetWalletAddress();
       } catch (error) {
         console.error(error)
       }
